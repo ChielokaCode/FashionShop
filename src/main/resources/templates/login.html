@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <title>Login</title>
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+
+    .navbar {
+      background-color: #28a745;
+    }
+
+    .navbar-brand img {
+      width: 40px;
+      height: 40px;
+      margin-right: 5px;
+    }
+
+    .navbar-nav a {
+      color: white !important;
+      margin-right: 15px;
+    }
+
+    .navbar-nav a:hover {
+      text-decoration: underline;
+    }
+
+    .dropdown-menu {
+      background-color: #28a745;
+    }
+
+    .dropdown-menu a {
+      color: white !important;
+    }
+
+    .dropdown-menu a:hover {
+      text-decoration: underline;
+    }
+
+    .login-container {
+      max-width: 400px;
+      margin: 50px auto;
+    }
+  </style>
+</head>
+<body>
+
+<!--error message-->
+<div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${param.error}">
+  <strong style="text-align: center"> Incorrect Username or Password! </strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+
+<!----------------------------->
+
+<nav class="navbar navbar-expand-lg navbar-dark">
+  <div class="container-fluid">
+    <a style="margin-left: 1rem;" th:href="@{/index}" class="navbar-brand" href="#">
+      <img style="width: 50px" src="https://image.similarpng.com/very-thumbnail/2021/01/Fashion-shop-logo-design-on-transparent-background-PNG.png" alt="Fashion Shop">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#" th:href="@{/index}" >Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" th:href="@{/admin/admin-login}">Admin</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" >Contact</a>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+<div class="container login-container">
+  <h2 class="text-center mb-4">Log In</h2>
+  <form method="post"  th:object="${user}"  th:action="@{/user/sign-in}"  class="form-horizontal"> <!--th:action="@{/login}-->
+
+    <div class="mb-3">
+      <label class="form-label">Email</label>
+      <input th:field="*{email}" type="email" class="form-control" placeholder="Enter your Email" required>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Password</label>
+      <input th:field="*{password}" type="password" class="form-control" placeholder="Enter your Password" required>
+    </div>
+    <button type="submit" name="login-submit" class="form-control btn btn-primary" value="Log in">Log In</button>
+  </form>
+
+  <div class="form-group mb-3">
+    <span>New User? <a href="/" th:href="@{/user/reg}">Register here</a></span>
+  </div>
+</div>
+
+<!-- Bootstrap JS and Popper.js are required for Bootstrap components to work -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

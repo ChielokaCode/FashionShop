@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Include Tailwind CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.0.8/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    /* Center the form on the page */
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    /* Style for the form container */
+    .form-container {
+      width: 400px; /* Adjust the width as needed */
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Adjust margin for spacing between labels and inputs */
+    label {
+      margin-top: 10px;
+    }
+  </style>
+  <title>EDIT PRODUCTS</title>
+</head>
+<body class="bg-light">
+
+<div class="form-container">
+  <!----------------Back Button---------------->
+  <a style="margin-left: 2rem; margin-top: 2rem;" href="javascript:history.back()" class="btn btn-outline-secondary mb-3">
+    Back
+  </a>
+
+  <form method="post" th:action="@{/product/admin-add-product}" th:object="${product}" class="bg-white p-8 rounded">
+
+    <!--Add hidden input field to handle update/edit -->
+    <input type="hidden" th:field="*{id}" />
+
+    <h2 class="text-2xl font-semibold mb-6 text-center">Edit Product</h2>
+    <div class="mb-3">
+      <label for="product-name" class="form-label">Product Name:</label>
+      <input type="text" class="form-control" id="product-name" th:field="*{productName}" required autofocus="autofocus">
+    </div>
+    <div class="mb-3">
+      <label for="product-price" class="form-label">Product Price:</label>
+      <input type="text" class="form-control" id="product-price" th:field="*{price}" required autofocus="autofocus">
+    </div>
+    <div class="mb-3">
+      <label for="product-quantity" class="form-label">Product Quantity:</label>
+      <input type="text" class="form-control" id="product-quantity" th:field="*{quantity}" required autofocus="autofocus">
+    </div>
+    <div class="mb-3">
+      <label for="product-category" class="form-label">Product Category:</label>
+      <input type="text" class="form-control" id="product-category" th:field="*{category}" required autofocus="autofocus">
+    </div>
+    <div class="mb-3">
+      <label for="product-image" class="form-label">Product Image:</label>
+      <input type="text" class="form-control" id="product-image" th:field="*{image}" required autofocus="autofocus">
+    </div>
+    <div class="mb-3">
+      <label for="product-description" class="form-label">Product Description:</label>
+      <input type="text" class="form-control" id="product-description" th:field="*{description}" required autofocus="autofocus">
+    </div>
+<!--    <input type="hidden" name="id">-->
+    <button type="submit" class="w-full btn btn-primary">Edit Product</button>
+  </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

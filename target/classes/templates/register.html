@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>SignUp</title>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .navbar {
+            background-color: #28a745;
+        }
+
+        .navbar-brand img {
+            width: 40px;
+            height: 40px;
+            margin-right: 5px;
+        }
+
+        .navbar-nav a {
+            color: white !important;
+            margin-right: 15px;
+        }
+
+        .navbar-nav a:hover {
+            text-decoration: underline;
+        }
+
+        .dropdown-menu {
+            background-color: #28a745;
+        }
+
+        .dropdown-menu a {
+            color: white !important;
+        }
+
+        .dropdown-menu a:hover {
+            text-decoration: underline;
+        }
+
+        .signup-container {
+            max-width: 400px;
+            margin: 50px auto;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+        <a style="margin-left: 1rem;" th:href="@{/index}" class="navbar-brand" href="#">
+            <img style="width: 50px" src="https://image.similarpng.com/very-thumbnail/2021/01/Fashion-shop-logo-design-on-transparent-background-PNG.png" alt="Fashion Shop">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                   <a class="nav-link" href="#" th:href="@{/index}">Home</a> <!--th:class="${#httpServletRequest.requestURI.endsWith('/home') ? 'active' : ''}-->
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" th:href="@{/admin/admin-login}">Admin</a> <!--th:class="${#httpServletRequest.requestURI.endsWith('/about') ? 'active' : ''}"-->
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" >Contact</a> <!--th:class="${#httpServletRequest.requestURI.endsWith('/contact') ? 'active' : ''}"-->
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</nav>
+
+<div class="container signup-container">
+    <div th:if="${param.success}">
+        <div class="alert alert-info">You're successfully registered to our awesome app!</div>
+    </div>
+    <h2 class="text-center mb-4">SignUp</h2>
+    <!--
+    th:action= "{@RequestMapping name/@PostMapping name}"
+    th:object="${user}" is same with the ModelAndView object "user"
+    th:field="*{username}" binds the username input field to the username property of the user object. That is the UserDto fields
+    method="post" sends the request to the @PostMapping to save a new User in the database
+    -->
+    <form th:action="@{/user/signup}"
+          method="post"
+          th:object="${user}"
+          role="form">
+
+
+        <div class="form-group mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" th:field="*{username}"  name="username" class="form-control" id="username" placeholder="Enter your Username"  required autofocus="autofocus">
+            <p th:errors = "*{username}" class="text-danger"
+               th:if="${#fields.hasErrors('username')}"></p>
+        </div>
+        <div class="form-group mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" th:field="*{email}" class="form-control" id="email" placeholder="Enter your Email" required autofocus="autofocus">
+            <p th:errors = "*{email}" class="text-danger"
+               th:if="${#fields.hasErrors('email')}"></p>
+        </div>
+        <div class="form-group mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" th:field="*{password}" class="form-control" id="password" placeholder="Enter your Password" required autofocus="autofocus">
+            <p th:errors = "*{password}" class="text-danger"
+               th:if="${#fields.hasErrors('password')}"></p>
+        </div>
+        <div class="form-group mb-3">
+            <label for="confirmPassword" class="form-label">Confirm Password</label>
+            <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm your Password" required autofocus="autofocus">
+        </div>
+        <button type="submit" class="btn btn-primary">SignUp</button>
+        <span> Already registered? <a th:href="@{/user/user-login}">Login here</a></span>
+    </form>
+</div>
+
+<!-- Bootstrap JS and Popper.js-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
