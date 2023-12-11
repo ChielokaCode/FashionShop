@@ -156,28 +156,4 @@ public class ProductController {
         model.addAttribute("cartItems", "Products added to Cart: " + session.getAttribute("cartItems"));
         return "dashboard";
     }
-
-//    @GetMapping("/product-page")
-//    public String getProductPage(Model model, Pageable pageable) {
-//        Page<Product> products = productService.findAllProductPageable(pageable);
-//        model.addAttribute("products", products);
-////        model.addAttribute("currentPage", products.getContent());
-//
-//        int totalPages = products.getTotalPages();
-//        long totalItems = products.getTotalElements();
-//        List<Product> productList = products.getContent();
-//
-//        model.addAttribute("currentPage", currentPage);
-//        model.addAttribute("totalPages", totalPages);
-//        model.addAttribute("totalItems", totalItems);
-//        model.addAttribute("products", productList);
-//
-//        return "dashboard";
-//    }
-
-//    @PostMapping("/product-page")
-//    public Page<Product> getProductPagination(@RequestBody PageRequestDto pageDto){
-//        Pageable pageable = new PageRequestDto().getPageable(pageDto);
-//        return productService.findAllProductPageable(pageable);
-//    }
 }
