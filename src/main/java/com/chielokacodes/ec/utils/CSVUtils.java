@@ -1,15 +1,10 @@
 //package com.chielokacodes.ec.utils;
 //
-//import com.chielokacodes.ec.entity.Admin;
 //import com.chielokacodes.ec.entity.Product;
-//import com.chielokacodes.ec.entity.User;
-//import com.chielokacodes.ec.repository.AdminRepository;
 //import com.chielokacodes.ec.repository.ProductRepository;
-//import com.chielokacodes.ec.repository.UserRepository;
 //import jakarta.annotation.PostConstruct;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.stereotype.Component;
-//
 //import java.io.BufferedReader;
 //import java.io.FileReader;
 //import java.io.IOException;
@@ -19,91 +14,43 @@
 //public class CSVUtils {
 //
 //    private ProductRepository productRepository;
-//    private UserRepository userRepository;
-//    private AdminRepository adminRepository;
 //
 //    @Autowired
-//    public CSVUtils(ProductRepository productRepository, UserRepository userRepository, AdminRepository adminRepository){
+//    public CSVUtils(ProductRepository productRepository) {
 //        this.productRepository = productRepository;
-//        this.userRepository = userRepository;
-//        this.adminRepository = adminRepository;
-//
 //    }
 //
+//    /////IF YOU ARE USING THE READER TO READ PRODUCT DETAILS IN CSV OR EXCEL FORMAT, WRITE A METHOD TO CHECK
+//    ////THAT THE PRODUCTS ARE NOT DOUBLING ITSELF INTO THE DATABASE ANYTIME YOU RUN THE SERVER
+//    ////OR WRITE METHOD TO MAKE THE BUFFERED READER ONLY RUN ONCE TO POPULATE DATABASE AND IF
+//    ////ITS RUN AGAIN IT CHECKS THAT NO TWO PRODUCTS HAVE SAME PRODUCT NAME IN DATABASE AND SO DOESNT READ THE READ
+//    /////ON CONCURRENT RUNS, IF IT FINDS A PRODUCT WITH PRODUCT NAME DIFFERENT FROM THOSE IN DATABASE, IT SAVES THAT ONE ONLY
+//
+//
 //    @PostConstruct
-//    public void readUserCSV(){
+//    public void readProductDetailsCSV() {
+//        try
+//                (BufferedReader reader = new BufferedReader(new FileReader("src/main/java/com/chielokacodes/ec/utils/products.csv"))) {
+//            String line;
+//            boolean isFirstLine = false;
+//            while ((line = reader.readLine()) != null) {
+//                String[] product = line.split(",");
+//                if (isFirstLine) {
+//                    Product product1 = Product.builder()
+//                            .productName(product[0])
+//                            .price(new BigDecimal(product[1]))
+//                            .quantity(Long.parseLong(product[2]))
+//                            .category(product[3])
+//                            .image(product[4])
+//                            .description(product[5])
+//                            .build();
+//                    productRepository.save(product1);
+//                }
+//                isFirstLine = true;
+//            }
 //
-//
-////        try
-////                (BufferedReader reader = new BufferedReader(new FileReader("src/main/java/com/chielokacodes/ec/utils/users.csv")))
-////        {
-////            String line;
-////            boolean isFirstLine = false;
-////            while ((line = reader.readLine()) != null){
-////                String[] users = line.split(",");
-////                if(isFirstLine) {
-////                    User user1 = User.builder()
-////                            .email(users[0])
-////                            .username(users[1])
-////                            .password(users[2])
-////                            .image(users[3])
-////                            .build();
-////                    userRepository.save(user1);
-////                }
-////                isFirstLine = true;
-////            }
-////
-////        }catch(IOException e){
-////        throw new RuntimeException(e);
-////    }
-//
-//
-////        try
-////                (BufferedReader reader = new BufferedReader(new FileReader("src/main/java/com/chielokacodes/ec/utils/products.csv")))
-////        {
-////            String line;
-////            boolean isFirstLine = false;
-////            while ((line = reader.readLine()) != null){
-////                String[] product = line.split(",");
-////                if(isFirstLine) {
-////                    Product product1 = Product.builder()
-////                            .category(product[0])
-////                            .price(new BigDecimal(product[1]))
-////                            .productName(product[2])
-////                            .quantity(Long.parseLong(product[3]))
-////                            .image(product[4])
-////                            .build();
-////                    productRepository.save(product1);
-////                }
-////                isFirstLine = true;
-////            }
-////
-////        }catch(IOException e){
-////            throw new RuntimeException(e);
-////        }
-//
-////        try
-////                (BufferedReader reader = new BufferedReader(new FileReader("src/main/java/com/chielokacodes/ec/utils/admin.csv")))
-////        {
-////            String line;
-////            boolean isFirstLine = false;
-////            while ((line = reader.readLine()) != null){
-////                String[] admin = line.split(",");
-////                if(isFirstLine) {
-////                    Admin admin1 = Admin.builder()
-////                            .email(admin[0])
-////                            .username(admin[1])
-////                            .password(admin[2])
-////                            .image(admin[3])
-////                            .build();
-////                    adminRepository.save(admin1);
-////                }
-////                isFirstLine = true;
-////            }
-////
-////        }catch(IOException e){
-////            throw new RuntimeException(e);
-////        }
-//
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
 //    }
 //}
