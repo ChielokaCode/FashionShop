@@ -4,7 +4,7 @@ Customers can view products in single view and in category,
 
 Customers can add products to Cart with Total Price of Products Shown,
 
-Customers can Make Payment for products (not added yet),
+Customers can Make Payment for products, then Cart will become Empty for another Order
 
 Search Functionality to help Customers search for Products easity without scrolling endlessly on Page,
 
