@@ -22,4 +22,5 @@ Thymeleaf/Bootstrap template and styling used,
 
 SpringBoot MVC arthitecture used with Spring boot Jpa (JpaRepository)- for accessing Database,
 
-
+Watch the Video here-
+https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7140304893029912576
