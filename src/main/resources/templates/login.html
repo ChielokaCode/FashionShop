@@ -49,11 +49,7 @@
 </head>
 <body>
 
-<!--error message-->
-<div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${param.error}">
-  <strong style="text-align: center"> Incorrect Username or Password! </strong>
-  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
+
 
 
 <!----------------------------->
@@ -83,6 +79,18 @@
     </div>
   </div>
 </nav>
+<br>
+<!--error message-->
+<div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${param.error}">
+  <strong style="text-align: center"> Incorrect Username or Password! </strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+<br>
+<!----------Success Alert---->
+<div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${param.success}">
+  <strong style="text-align: center">Successfully Registered, Pls Login In!</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
 
 <div class="container login-container">
   <h2 class="text-center mb-4">Log In</h2>

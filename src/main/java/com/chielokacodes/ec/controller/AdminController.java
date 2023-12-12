@@ -39,15 +39,16 @@ public class AdminController {
     //@ModelAttribute is used to bind the form data (from the user's input) to the UserDto object.
     //the "/signup" in @PostMapping must be the same in form action="/signup" ,form method will be "post"
     @PostMapping("/admin-signup")
-    public String signup(@ModelAttribute AdminDto adminDto, HttpServletRequest request) {
+    public String signup(@ModelAttribute AdminDto adminDto, HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
         session.setAttribute("email", adminDto.getEmail());
             this.adminService.saveAdmin(new Admin(adminDto));
-            return "redirect:/admin/admin-login";
+            model.addAttribute("success", true);
+            return "redirect:/admin/admin-login?success";
     }
 
     @GetMapping("/admin-login")
-    public ModelAndView loginPage(Model model){
+    public ModelAndView loginPage(){
         return new ModelAndView("admin_login").addObject("admin", new AdminDto());
     }
 

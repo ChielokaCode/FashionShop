@@ -12,35 +12,44 @@ import org.springframework.ui.Model;
 @Service
 public class OrderServiceImpl implements OrderService {
 
-    private UserServiceImpl userService;
-    private OrderRepository orderRepository;
+    private final UserServiceImpl userService;
+    private final OrderRepository orderRepository;
 
     @Autowired
     public OrderServiceImpl(OrderRepository orderRepository, UserServiceImpl userService){
         this.orderRepository = orderRepository;
         this.userService = userService;
     }
-    @Override
+
+
+    /////////USER MAKE PAYMENT, CART-ITEMS RETURNS TO NULL, BALANCE IS SUBTRACTED BY TOTAL PRICE OF PRODUCT
     public String makePayment(HttpSession session, Model model) {
-        User user = userService.findUserById((Long) session.getAttribute("userID"));
-        if(user == null){
-            throw new NullPointerException("No Product in Cart");
-        }
+        User user = userService.findUserById((Long) session.getAttribute("userId"));
         Order order = (Order) session.getAttribute("order");
-        if (user.getBalance().doubleValue()<order.getTotalPrice().doubleValue()){
-            model.addAttribute("paid", "Insufficient balance!");
+
+        //Check User Balance can buy the Product
+        if (user.getBalance().doubleValue() < order.getTotalPrice().doubleValue()) {
+            model.addAttribute("paid", "Insufficient balance na dey your account!");
             return "checkout";
         }
+
+        //Substract User Balance
         user.setBalance(user.getBalance().subtract(order.getTotalPrice()));
+
         userService.saveUser(user);
-        Order order1 = saveOrder(order);
-        session.setAttribute( "order", null);
+        saveOrder(order);
+
+        //Reset cartItem and order to null after purchase, so user can set a new cart and order for another purchase
+        session.setAttribute("cartItems", null);
+        session.setAttribute("order", null);
         model.addAttribute("paid", "Payment was successful!");
         return "successfully-paid";
     }
 
-    private Order saveOrder(Order order) {
-        return orderRepository.save(order);
+
+
+    private void saveOrder(Order order) {
+        orderRepository.save(order);
     }
 
 

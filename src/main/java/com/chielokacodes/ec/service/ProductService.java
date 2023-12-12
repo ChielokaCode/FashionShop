@@ -16,6 +16,8 @@ public interface ProductService {
     Page<Product> findAllProductPageable(Pageable pageable);
     void deleteProductById(Long id);
     List<Product> getProductsByProductName(String productName);
+    List<Product> getProductsByCategory(String category);
     void addProductToCart(Long id, HttpServletRequest request);
-    void checkOutCart(HttpSession session, Model model);
+    List<Product> checkOutCart(HttpSession session, Model model);
+    List<Product> getProductsInCart(HttpSession session);
 }

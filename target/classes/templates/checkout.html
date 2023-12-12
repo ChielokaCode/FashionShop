@@ -3,8 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <title>E-commerce Admin Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZwT" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
   <style>
     body {
       background-color: #f8f9fa;
@@ -61,11 +63,13 @@
     <a style="margin-left: 1rem;" th:href="@{/index}" class="navbar-brand" href="#">
       <img src="https://image.similarpng.com/very-thumbnail/2021/01/Fashion-shop-logo-design-on-transparent-background-PNG.png" alt="Fashion Shop" >
     </a>
-    <div class="user-info" style="margin-left: auto; margin-right: 2rem">
-      <img style="width: 50px;"  alt="User" class="user-image rounded-circle"> <!--th:src="${products.get(1).getImage()}"-->
-      <span><b>Welcome!</b></span>
+    <!-------------User-Info-------------->
+    <div style="margin-right: 2rem; margin-left: auto" class="user-info">
+      <i class="fas fa-user fa-bounce" style="color: #ffffff;"> </i>
+      <!--      <span style="color: white"><b>Profile! </b></span>-->
       <a th:href="@{/admin/admin-logout}" class="btn btn-outline-light mx-3">Logout</a>
     </div>
+    <!----------------------------------->
   </div>
 </nav>
 <!--Back Button-->
@@ -76,7 +80,6 @@
 <div class="container admin-table">
   <h2 style="text-align: center">Cart</h2>
   <div class="row">
-
     <div class="col">
     </div>
   </div>
@@ -89,18 +92,18 @@
       <th>Product Name</th>
       <th>Product Image</th>
       <th>Product Price</th>
-<!--      <th>Action</th>-->
+      <!--      <th>Action</th>-->
     </tr>
     </thead>
     <tbody>
-    <tr th:each="product: ${product}">
-      <td th:text="${product.productName}"></td>
-      <td><img th:src="${product.image}" /></td>
-      <td th:text="${product.price}"></td>
-<!--      <td ><a th:href="@{/product/add-cart(cart=${product.id})}">Pay</a></td>-->
-    </tr>
-    <a class="btn btn-info" href="/product/pay">Proceed checkout</a>
 
+    <tr th:each="product: ${cartProducts}">
+      <td th:text="${product.productName}"></td>
+      <td><img th:src="${product.image}"  alt=""/></td>
+      <td th:text="${product.price}"></td>
+      <!--      <td ><a th:href="@{/product/add-cart(cart=${product.id})}">Pay</a></td>-->
+    </tr>
+    <a class="btn btn-info" th:href="@{/product/pay}">Proceed checkout</a>
     <!-- Add more rows as needed -->
     </tbody>
   </table>

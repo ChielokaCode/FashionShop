@@ -4,15 +4,14 @@ package com.chielokacodes.ec.entity;
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import com.chielokacodes.ec.dto.UserDto;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder

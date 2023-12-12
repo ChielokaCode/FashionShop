@@ -20,6 +20,8 @@ public class AdminServiceImpl implements AdminService {
         this.adminRepository = adminRepository;
     }
 
+
+
     @Override
     public Admin saveAdmin(Admin admin) {
         return adminRepository.save(admin);
@@ -27,10 +29,13 @@ public class AdminServiceImpl implements AdminService {
 
 
 
+
     @Override
     public Admin findAdminByEmail(String email) {
         return adminRepository.findByEmail(email);
     }
+
+
 
     @Override
     public boolean verifyPassword(PasswordDto passwordDto) {

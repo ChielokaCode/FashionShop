@@ -2,9 +2,31 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Product Application</title></head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Product Application</title>
+  <!-- Latest Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f8f9fa; /* Bootstrap background color */
+    }
+
+    .container {
+      margin-top: 2rem; /* Add some space from the top */
+    }
+
+    h2 {
+      color: #28a745; /* Bootstrap success color */
+    }
+  </style>
+</head>
 <body>
-<b th:text="${paid}"></b>
-<a style="margin-left: 2rem;" class="btn btn-success" href="/product/user-dashboard">Continue Shopping</a>
+<div style="margin-top: 2rem; margin-left: 2rem;" class="container">
+  <h2 th:text="${paid}"></h2>
+  <a class="btn btn-success" th:href="@{/product/user-dashboard}">Continue Shopping</a>
+</div>
+
+<!-- Latest Bootstrap JS and Popper.js -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

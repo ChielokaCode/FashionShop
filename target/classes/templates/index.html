@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
 
   <title>Fashion Shop</title>
   <style>
@@ -94,15 +95,34 @@
       border-width: 0px;
     }
 
+    .footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #f0f0f0;
+    }
+
+    .footer-text {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .social-icons {
+      font-size: 24px;
+      margin: 0 10px;
+      color: #333; /* Icon color */
+    }
+
 
   </style>
 </head>
 <body>
+<br>
 <!----------Logout Alert---->
 <div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${param.logout}">
   <strong style="text-align: center"> Successfully Logged Out! </strong>
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
+<br>
 <!---------------------------->
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
   <div class="container-fluid">
@@ -180,6 +200,18 @@
     </div>
   </div>
 </div>
+
+<!-----------------------------Footer--------------->
+<div class="footer">
+  <div class="footer-text">
+    @FashionShop 2023, ChielokaCodes
+  </div>
+  <!-- Social Icons -->
+  <a href="#" class="social-icons" title="LinkedIn" target="_blank"><i class="fab fa-linkedin"></i></a>
+  <a href="#" class="social-icons" title="GitHub" target="_blank"><i class="fab fa-github"></i></a>
+  <a href="#" class="social-icons" title="Facebook" target="_blank"><i class="fab fa-facebook"></i></a>
+</div>
+<!-------------------------End----Footer--------------->
 
 <!-- Bootstrap JS and Popper.js are required for Bootstrap components to work -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

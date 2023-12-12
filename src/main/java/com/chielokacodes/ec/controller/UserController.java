@@ -31,25 +31,32 @@ public class UserController {
 
    //the ModelAndView helps us to set (the "object" required in "th:object")
    // and (view that is the page that will be shown)
+    //Request to get the Registration Page rendered in it the new user registering
     @GetMapping("/reg")
     public ModelAndView signUpPage(Model model){
         return new ModelAndView("register").addObject("user", new UserDto());
     }
 
     //@ModelAttribute is used to bind the form data (from the user's input) to the UserDto object.
-    //the "/signup" in @PostMapping must be the same in form action="/signup" ,form method will be "post"
+    //the "/signup" in @PostMapping must be the same in form action="/user/signup" ,form method will be "post"
     @PostMapping("/signup")
-    public String signup(@ModelAttribute UserDto userDto) {
+    public String signup(@ModelAttribute UserDto userDto, Model model) {
         User user = userService.saveUser(new User(userDto));
         log.info("User created --->{} ", user);
-        return "login";
+        model.addAttribute("success", true);
+        return "redirect:/user/user-login?success";
     }
 
+    //Request to get User Login Page rendered in it the new User logged in
     @GetMapping("/user-login")
-    public ModelAndView loginPage(Model model){
+    public ModelAndView loginPage(){
         return new ModelAndView("login").addObject("user", new UserDto());
     }
 
+
+    //Request that post or logs in a user, then ocreats a session for the user
+    //and redirects the user to the user-dashboard
+    //else if password is incorrect, keeps the user on the login form
     @PostMapping("/sign-in")
     public String login(@ModelAttribute UserDto userDto, HttpServletRequest request, Model model) {
         User user = userService.findUserByEmail(userDto.getEmail());
@@ -61,7 +68,8 @@ public class UserController {
 
             if (userService.verifyPassword(passwordDto)) {
                 HttpSession session = request.getSession();
-                session.setAttribute("userId", user.getId());
+                session.setAttribute("user", new User()); //just added this - check error
+                session.setAttribute("userId", user.getId()); //create a session for a user that login to the app, that saves the id of the user into the seesion
                 session.setAttribute("userName", user.getUsername());
                 session.setAttribute("userImage", user.getImage());
 
@@ -83,6 +91,8 @@ public class UserController {
         }
     }
 
+
+    //Request to invalidate or logout the user session and redirect the user to Index Page
     @GetMapping("/logout")
     public String logOut(HttpSession session, HttpServletRequest request, Model model){
         session.invalidate();
